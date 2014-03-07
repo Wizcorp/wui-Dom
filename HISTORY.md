@@ -1,5 +1,10 @@
 # Release history
 
+## v0.2.1
+
+wuiDom objects now have a children property.
+You can use destroyChildren to run destroy on all of that wuiDom's children.
+
 ## v0.2.0
 
 ### Welcome to simplicity

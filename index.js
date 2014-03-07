@@ -70,6 +70,7 @@ function createHtmlElement(tagName, options) {
  */
 function WuiDom(tagName, options) {
 	EventEmitter.call(this);
+	this.children = [];
 	this.elementIsVisible = true;
 	this.currentTextContent = null;
 	this.rootElement = null;
@@ -143,6 +144,8 @@ WuiDom.prototype.appendTo = function (newParent) {
  * @param {WuiDom} newChild
  */
 WuiDom.prototype.appendChild = function (newChild) {
+	this.children.push(newChild)
+
 	this.rootElement.appendChild(newChild.rootElement);
 
 	// touch events are known to get lost, so rebind them
@@ -150,6 +153,17 @@ WuiDom.prototype.appendChild = function (newChild) {
 	newChild.rebindTouchListeners();
 
 	return newChild;
+};
+
+
+/**
+ * destroyChildren
+ */
+WuiDom.prototype.destroyChildren = function () {
+	for (var i = 0; i < this.children.length; i += 1) {
+		this.children[i].destroy();
+	}
+	this.children = [];
 };
 
 
