@@ -605,7 +605,7 @@ function removeClassNames(baseList, args) {
  */
 WuiDom.prototype.getClassNames = function () {
 	// returns an array of all class names
-
+	if (!this.rootElement) return [];
 	return parseClassNames(this.rootElement.className);
 };
 
