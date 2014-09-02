@@ -126,7 +126,7 @@ WuiDom.prototype.assign = function (tagName, options) {
 
 /**
  * Return the name of the WuiDom given on creation
- * @returns {string}
+ * @returns {string|number}
  */
 WuiDom.prototype.getWuiName = function () {
 	return this._name;
@@ -134,13 +134,14 @@ WuiDom.prototype.getWuiName = function () {
 
 
 /**
- * @param {WuiDom|String} child
+ * @param {WuiDom|String|number} child
  * @returns {WuiDom} - oldChild
  */
 WuiDom.prototype.removeChild = function (child) {
-	if (typeof child === 'string' && this._childrenMap[child]) {
+	var childIsChildName = (typeof child === 'string' || typeof child === 'number');
+	if (childIsChildName && this._childrenMap[child]) {
 		child = this._childrenMap[child];
-	} else if (typeof child === 'string') {
+	} else if (childIsChildName) {
 		throw new Error('WuiDom: Given name is not a current child');
 	}
 
@@ -325,7 +326,7 @@ WuiDom.prototype.getChildren = function () {
 };
 
 /**
- * @param {string} childName
+ * @param {string|number} childName
  * @returns {WuiDom|undefined}
  */
 WuiDom.prototype.getChild = function (childName) {
