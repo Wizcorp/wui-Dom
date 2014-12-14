@@ -1,6 +1,6 @@
 BIN=./node_modules/.bin
 DUO-TEST=$(BIN)/duo-test
-TEST-BUILD=./build/testsBuild.js
+TEST-BUILD=./build/test/index.js
 
 define helpStarting
 	@echo "  make help              Prints this help."
@@ -27,19 +27,26 @@ build:
 	@echo "Building..."
 	@echo
 	@mkdir -p build/
-	@$(BIN)/duo test/index.js > $(TEST-BUILD)
+	@$(BIN)/duo test/index.js
 
 .PHONY: help deps deps-npm build
 
-clean:
+clean-deps:
 	@echo
-	@echo "Cleaning..."
+	@echo "Cleaning npm..."
 	@echo
 	rm -rf node_modules/
+
+clean-build:
+	@echo
+	@echo "Cleaning build..."
+	@echo
 	rm -rf components/
 	rm -rf build/
 
-.PHONY: clean
+clean: clean-deps clean-build
+
+.PHONY: clean clean-deps clean-build
 
 test: build test-phantomjs
 
