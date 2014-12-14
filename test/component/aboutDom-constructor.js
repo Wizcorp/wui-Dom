@@ -42,7 +42,7 @@ describe('constructor', function () {
 
 	it('should have text', function () {
 		var wuiDom = new WuiDom('div', { text: 'The cake is a lie' });
-		assert.equal(wuiDom.rootElement.innerText, 'The cake is a lie');
+		assert.equal(wuiDom.rootElement.innerHTML, 'The cake is a lie');
 	});
 
 	it('should wuiDomify the <body>', function () {
